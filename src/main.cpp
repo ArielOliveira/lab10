@@ -119,25 +119,6 @@ void menuLoop();
 int main() {
 
 	menuLoop();
-	
-	List<int> l;
-	Stack<int> s(20);
-	s.push(5);
-	std::cout << s.top() << std::endl;
-
-	MyQueue<string> q(5);
-	bool what;
-	what = q.pushBack("brasileirinho");
-	what = q.pushBack("chinesinho");
-	what = q.pushBack("americaninho");
-	what = q.pushBack("xibata");
-	what = q.pushBack("disgraça");
-	what = q.pushBack("merda");
-
-	cout << q.front() << endl;
-	cout << what << endl;
-	q.popFront();
-	
 
 	return 0;
 }
@@ -156,7 +137,7 @@ bool choiceTAD(int c) {
 		default: return false;
 			break;
 	}
-	return false;
+	return true;
 }
 
 template<typename T>
@@ -213,8 +194,7 @@ bool choiceMenu(int c) {
 		case 1: if (pointer) {
 					menuTAD();
 					while ((!getNumber(c)) && (!choiceTAD<T>(c))) {
-						menuSort();
-						cout << "Opção Inválida!" << endl;	
+						menuTAD();
 					} 
 				}
 			break;

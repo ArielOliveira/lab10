@@ -50,7 +50,7 @@ namespace edb1 {
 	
 	template <typename T>		
 	List<T>::~List() {
-		deleteList();
+		//deleteList();
 	}
 	
 	template <typename T>
@@ -165,7 +165,8 @@ namespace edb1 {
 	template <typename T>
 	void List<T>::deleteList() {
 		typename List<T>::Node *sentry = head->next;
-		while ((sentry = sentry->next)) {
+		while ((sentry->next != NULL)) {
+			sentry = sentry->next;
 			delete sentry->previous;
 		}
 		delete head;
