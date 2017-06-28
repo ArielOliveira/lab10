@@ -42,7 +42,7 @@ void printType() {
 
 void menu() {
 	cout << ">>>>>PROGRAMA DE TESTES<<<<<" << endl;
-	cout << "1 - Testar TADs" << endl;
+	cout << "1 - Testar TADs (requer Vetor)" << endl;
 	cout << "2 - Testar Ordenação (requer Vetor)" << endl;
 	cout << "3 - Testar Buscas (requer Ordenação)" << endl;
 	printType();
@@ -79,18 +79,40 @@ void menuType() {
 }
 
 template<typename T>
-void listTest() {
-
+void listTest(T *v) {
+	List<T> l;
+	cout << "Inserindo vetor na lista..." << endl;
+	for (int i = 0; i < vecSize; i++) l.insertAtHead(v[i]);
+	cout << "Imprimindo lista..." << endl;
+	l.printList();
+	cout << "Destruindo lista..." << endl;
+	l.~List();
 }
 
 template<typename T>
-void stackTest() {
-
+void stackTest(T *v) {
+	Stack<T> s(vecSize);
+	cout << "Empilhando vetor..." << endl;
+	for (int i = 0; i < vecSize; i++) s.push(v[i]);
+	cout << "Desempilhando..." << endl;
+	cout << s.top() << endl;
+	while (s.pop()) {
+		cout << s.top() << endl;
+	}
+	cout << "Destruindo lista..." << endl;
+	s.~Stack();
 }
 
 template<typename T>
-void queueTest() {
-
+void queueTest(T *v) {
+	MyQueue<T> q(vecSize);
+	cout << "Inserindo vetor na fila..." << endl;
+	for (int i = 0; i < vecSize; i++) q.pushBack(v[i]);
+	cout << "Exibindo fila..." << endl;
+	cout << q.front() << endl;
+	while (q.popFront()) cout << q.front() << endl;
+	cout << "Destruindo fila..." << endl;
+	q.~MyQueue();
 }
 
 void menuLoop();
@@ -123,18 +145,18 @@ int main() {
 template<typename T>
 bool choiceTAD(int c) {
 	switch(c) {
-		case 1: listTest<T>();
+		case 1: listTest<T>((T*)pointer);
 			break;
-		case 2: stackTest<T>();
+		case 2: stackTest<T>((T*)pointer);
 			break;
-		case 3: queueTest<T>();
+		case 3: queueTest<T>((T*)pointer);
 			break;
 		case 4: return true;
 			break;
 		default: return false;
 			break;
 	}
-	return true;
+	return false;
 }
 
 template<typename T>
@@ -188,11 +210,13 @@ bool choiceSearch(int c) {
 template<typename T>
 bool choiceMenu(int c) {
 	switch(c) {
-		case 1: menuTAD();
-				while ((!getNumber(c)) && (!choiceTAD<T>(c))) {
-					menuSort();
-					cout << "Opção Inválida!" << endl;	
-				} 
+		case 1: if (pointer) {
+					menuTAD();
+					while ((!getNumber(c)) && (!choiceTAD<T>(c))) {
+						menuSort();
+						cout << "Opção Inválida!" << endl;	
+					} 
+				}
 			break;
 		case 2: if (pointer) {
 					menuSort();
