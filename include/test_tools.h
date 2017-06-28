@@ -3,6 +3,9 @@
 
 #include "alloc_exception.h"
 
+#include <new>
+using std::bad_alloc;
+
 #include <iostream>
 using std::cerr;
 using std::endl;
@@ -42,7 +45,7 @@ T* vectorSorter(int k) {
 		for (int i = 0; i < k; i++) {
 			v[i] = randomize(max);
 		}
-	} catch (AllocException &err) {
+	} catch (bad_alloc	 &err) {
 		cerr << exception.what() << endl;
 		v = NULL;
 	}
@@ -61,7 +64,7 @@ string* vectorSorter(int k) {
 		for (int i = 0; i < k; i++) {
 			v[i] = "N/A";
 		}
-	} catch (AllocException &err) {
+	} catch (bad_alloc &err) {
 		cerr << exception.what() << endl;
 		v = NULL;
 	}
