@@ -36,10 +36,20 @@ T* vectorSorter(int k) {
 	return v;
 }
 
+template<>
+string* vectorSorter(int k) {
+	srand(time(NULL));
+	string *v = new string[k];
+	for (int i = 0; i < k; i++) {
+		//v[i] = randomize(max);
+	}
+	return v;
+}
+
 template <typename T>
 void printVector(T *v, int n) {
 	for (int i = 0; i < n; i++) {
-		std::cout << (int)v[i] << " ";
+		std::cout << v[i] << " ";
 	}
 	std::cout << std::endl;
 }

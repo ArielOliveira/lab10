@@ -41,7 +41,7 @@ void printType() {
 }
 
 void menu() {
-	cout << "PROGRAMA DE TESTES" << endl;
+	cout << ">>>>>PROGRAMA DE TESTES<<<<<" << endl;
 	cout << "1 - Testar TADs" << endl;
 	cout << "2 - Testar Ordenação (requer Vetor)" << endl;
 	cout << "3 - Testar Buscas (requer Ordenação)" << endl;
@@ -52,7 +52,7 @@ void menu() {
 }
 
 void menuTAD() {
-	cout << "TESTE DE TADs" << endl;
+	cout << ">>>>>TESTE DE TADs<<<<<" << endl;
 	cout << "1 - Testar Lista" << endl;
 	cout << "2 - Testar Pilha" << endl;
 	cout << "3 - Testar Fila" << endl;
@@ -60,7 +60,7 @@ void menuTAD() {
 }
 
 void menuSort() {
-	cout << "TESTE DE ORDENAÇÃO" << endl;
+	cout << ">>>>>TESTE DE ORDENAÇÃO<<<<<" << endl;
 	cout << "1 - Bubble Sort" << endl;
 	cout << "2 - Insertion Sort" << endl;
 	cout << "3 - Selection Sort" << endl;
@@ -70,7 +70,7 @@ void menuSort() {
 }
 
 void menuType() {
-	cout << "SELECIONAR TIPO" << endl;
+	cout << ">>>>>SELECIONAR TIPO<<<<<" << endl;
 	cout << "1 - Inteiros" << endl;
 	cout << "2 - Reais (Float)" << endl;
 	cout << "3 - Reais (Double)" << endl;
@@ -79,66 +79,26 @@ void menuType() {
 }
 
 template<typename T>
-void listTest(T *v, int n) {
+void listTest() {
 
 }
 
+template<typename T>
 void stackTest() {
 
 }
 
+template<typename T>
 void queueTest() {
 
 }
 
-void makeVector(void *v, int n) {
-
-}
-
-template<typename T>
-bool choiceSort(int c, int n);
-
-bool choiceTAD(int c);
-
-bool choiceType(int c);
-
-template<typename T>
-bool choiceMenu(int c);
-
 void menuLoop();
-
 int main() {
 
 	menuLoop();
-	/*
-	//testa merge_sort
-	float *v = vectorSorter<float>(k, max);
-	std::cout << "Vetor desordenado" << std::endl;
-	printVector<T>((T*)pointer, k);
-	std::cout << std::endl;
-	//quickSort<float>(v, 0, k-1);
-	//mergeSort<float>(v, k);
-	//selectionSort<float>(v, k);
-	//insertionSort<float>(v, k);
-	bubbleSort<float>(v, k);
-	std::cout << "Vetor ordenado" << std::endl;
-	printVector<float>(v, k);
-	std::cout << std::endl;
-	*/
 	
-	/*
-	//testa binary_search
-	std::cout << "Testando binary search" << std::endl;
-	for (int i = 0; i < k; i++) {
-		if (binarySearch<float>(v, v[i], k-1)) {
-			std::cout << "Elemento " << v[i] << " " << "encontrado." << std::endl;
-		} else {
-			std::cout << "Elemento " << v[i] << " " << "não encontrado." << std::endl;
-		}	
-	}
-	*/
-	
-	//List<int> l;
+	List<int> l;
 	Stack<int> s(20);
 	s.push(5);
 	std::cout << s.top() << std::endl;
@@ -163,11 +123,11 @@ int main() {
 template<typename T>
 bool choiceTAD(int c) {
 	switch(c) {
-		case 1:  
+		case 1: listTest<T>();
 			break;
-		case 2:
+		case 2: stackTest<T>();
 			break;
-		case 3: 
+		case 3: queueTest<T>();
 			break;
 		case 4: return true;
 			break;
@@ -204,7 +164,7 @@ bool choiceSort(int c, int n) {
 			break;
 		case 4: mergeSort<T>((T*)pointer, n);
 			break;
-		case 5: quickSort<T>((T*)pointer, 0, n);
+		case 5: quickSort<T>((T*)pointer, 0, n-1);
 			break;
 		default: return false;
 			break;
@@ -213,19 +173,33 @@ bool choiceSort(int c, int n) {
 }
 
 template<typename T>
-bool choiceSearch() {
-	
+bool choiceSearch(int c) {
+	switch(c) {
+		case 1: 
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+	}
+	return false;
 }
 
 template<typename T>
 bool choiceMenu(int c) {
 	switch(c) {
 		case 1: menuTAD();
-				while ((!getNumber(c)) && (!choiceTAD<T>(c))) cout << "Opção Inválida!" << endl;
+				while ((!getNumber(c)) && (!choiceTAD<T>(c))) {
+					menuSort();
+					cout << "Opção Inválida!" << endl;	
+				} 
 			break;
 		case 2: if (pointer) {
 					menuSort();
-					while ((!getNumber(c)) && (!choiceSort<T>(c, vecSize))) cout << "Opção Inválida!" << endl;
+					while ((!getNumber(c)) && (!choiceSort<T>(c, vecSize))) {
+						menuSort();
+						cout << "Opção Inválida!" << endl;	
+					} 
 				} else {
 					cout << "Ainda sem vetor. Por favor escolha a opção 5." << endl;
 				}
@@ -261,23 +235,19 @@ bool choiceType(int c) {
 	switch(c) {
 		case INTEGER: typeS = "Inteiro";
 				menu();			
-				while ((!getNumber(c)) && (!choiceMenu<int>(c))) {
-					menu();
-				} 
+				while ((!getNumber(c)) && (!choiceMenu<int>(c))) menu();
 			break;
 		case FLOAT_POINT: typeS = "Real (Float)";
 				menu();
-				while ((!getNumber(c)) && (!choiceMenu<float>(c))) {
-					menu();
-				} 
+				while ((!getNumber(c)) && (!choiceMenu<float>(c))) menu();
 			break;
 		case DOUBLE_: typeS = "Real (Double)";
 				menu();
-				while ((!getNumber(c)) && (!choiceMenu<double>(c))) {
-					menu();
-				} 
+				while ((!getNumber(c)) && (!choiceMenu<double>(c))) menu();
 			break;
-		case STRING_:
+		case STRING_: typeS = "String";
+				menu();
+				while ((!getNumber(c)) && (!choiceMenu<string>(c))) menu();
 			break;
 		case 5: return true;
 			break;
