@@ -1,6 +1,12 @@
 #ifndef TEST_TOOLS_H
 #define TEST_TOOLS_H
 
+#include "alloc_exception.h"
+
+#include <iostream>
+using std::cerr;
+using std::endl;
+
 #include <cstdlib>
 
 #define MAX 1000
@@ -27,21 +33,37 @@ int randomize(int max) {
 
 template<typename T>
 T* vectorSorter(int k) {
-	T max = MAX;
-	srand(time(NULL));
-	T *v = new T[k];
-	for (int i = 0; i < k; i++) {
-		v[i] = randomize(max);
+	T *v;
+	AllocException exception;
+	try {
+		srand(time(NULL));
+		T max = MAX;
+		v = new T[k];
+		for (int i = 0; i < k; i++) {
+			v[i] = randomize(max);
+		}
+	} catch (AllocException &err) {
+		cerr << exception.what() << endl;
+		v = NULL;
 	}
+	
 	return v;
 }
 
+
+
 template<>
 string* vectorSorter(int k) {
-	srand(time(NULL));
-	string *v = new string[k];
-	for (int i = 0; i < k; i++) {
-		//v[i] = randomize(max);
+	string *v;
+	AllocException exception;
+	try {
+		v = new string[k];
+		for (int i = 0; i < k; i++) {
+			v[i] = "N/A";
+		}
+	} catch (AllocException &err) {
+		cerr << exception.what() << endl;
+		v = NULL;
 	}
 	return v;
 }

@@ -33,7 +33,7 @@ arielslib.so: $(SRC_DIR)/arielslib.cpp $(INC_DIR)/arielslib.h $(INC_DIR)/arielsl
 prog_estatico: $(INC_DIR)/test_tools.h $(INC_DIR)/keyboard_input.h $(INC_DIR)/input_exception.h
 	$(CC) $(CPPFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/arielslib.a -o $(OBJ_DIR)/$@
 
-prog_dinamico: $(INC_DIR)/test_tools.h $(INC_DIR)/keyboard_input.h $(INC_DIR)/input_exception.h
+prog_dinamico: $(INC_DIR)/test_tools.h $(INC_DIR)/keyboard_input.h $(INC_DIR)/input_exception.h $(INC_DIR)/alloc_exception.h
 	$(CC) $(CPPFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/arielslib.so -o $(OBJ_DIR)/$@
 
 
